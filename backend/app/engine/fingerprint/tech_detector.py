@@ -6,7 +6,7 @@ from HTTP headers, HTML content, JavaScript libraries, and cookies.
 """
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import structlog
 

@@ -7,8 +7,8 @@ Central router that mounts all v1 API route modules.
 from fastapi import APIRouter
 
 from app.api.v1.auth import router as auth_router
-from app.api.v1.scopes import router as scopes_router
 from app.api.v1.scans import router as scans_router
+from app.api.v1.scopes import router as scopes_router
 from app.api.v1.websocket import router as ws_router
 
 # ── V1 API Router ────────────────────────────────────────────

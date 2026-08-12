@@ -9,15 +9,15 @@ Every URL is validated through the Scope Enforcement Gateway.
 import asyncio
 from collections import deque
 from dataclasses import dataclass, field
-from urllib.parse import urljoin, urlparse
 from typing import Any
+from urllib.parse import urlparse
 
 import structlog
 
 from app.config import get_settings
-from app.engine.http.prober import HTTPProber, HTTPResponse
+from app.engine.crawler.form_parser import DiscoveredForm, FormParser
 from app.engine.crawler.link_extractor import LinkExtractor
-from app.engine.crawler.form_parser import FormParser, DiscoveredForm
+from app.engine.http.prober import HTTPProber
 from app.models.scope import AuthorizedScope
 
 logger = structlog.get_logger(__name__)

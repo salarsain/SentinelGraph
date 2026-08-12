@@ -5,7 +5,7 @@ Business logic for scan lifecycle: creation, progress, and result management.
 """
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import structlog
 from sqlalchemy import func, select
@@ -18,7 +18,6 @@ from app.core.exceptions import (
     ScopeViolationError,
 )
 from app.models.scan import (
-    DiscoveredAsset,
     Scan,
     ScanPhase,
     ScanStatus,
@@ -162,7 +161,7 @@ class ScanService:
 
         scan.celery_task_id = task_id
         scan.status = ScanStatus.RUNNING
-        scan.started_at = datetime.now(timezone.utc)
+        scan.started_at = datetime.now(UTC)
         await self.db.flush()
         await self.db.refresh(scan)
 
@@ -189,7 +188,7 @@ class ScanService:
             raise NotFoundError(detail="Scan not found")
 
         # Verify ownership through target
-        target = await self.get_target(scan.target_id, owner_id)
+        await self.get_target(scan.target_id, owner_id)
 
         return ScanResponse.model_validate(scan)
 
@@ -248,7 +247,7 @@ class ScanService:
             celery_app.control.revoke(scan.celery_task_id, terminate=True)
 
         scan.status = ScanStatus.CANCELLED
-        scan.completed_at = datetime.now(timezone.utc)
+        scan.completed_at = datetime.now(UTC)
         await self.db.flush()
         await self.db.refresh(scan)
 

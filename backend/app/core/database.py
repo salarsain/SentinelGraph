@@ -5,8 +5,8 @@ Async SQLAlchemy with PostgreSQL (asyncpg).
 Provides session factory, engine lifecycle, and base model.
 """
 
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 import structlog
 from sqlalchemy.ext.asyncio import (

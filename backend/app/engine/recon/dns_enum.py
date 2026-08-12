@@ -121,7 +121,6 @@ class DNSEnumerator:
         records = []
 
         try:
-            import dns.asyncresolver
 
             answers = await resolver.resolve(domain, rtype)
 

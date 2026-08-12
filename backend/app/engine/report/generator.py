@@ -7,9 +7,8 @@ finding details, and remediation guidance.
 """
 
 import json
+from dataclasses import dataclass, field
 from datetime import datetime
-from dataclasses import dataclass, field, asdict
-from pathlib import Path
 
 import structlog
 

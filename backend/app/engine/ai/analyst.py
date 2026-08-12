@@ -5,10 +5,10 @@ Uses Hugging Face models for finding analysis — NO OpenAI API needed.
 Runs locally with transformers pipeline or via Hugging Face Inference API (free tier).
 """
 
-from enum import Enum
-from typing import Any
 import json
 import re
+from enum import Enum
+from typing import Any
 
 import structlog
 from pydantic import BaseModel, Field
@@ -371,7 +371,7 @@ class AISecurityAnalyst:
             severity_recommendation=kb_severity,
             analysis=f"Rule-based analysis for {finding_type}: {title}. "
                      f"Found at {url}" + (f" via parameter '{parameter}'" if parameter else "") + ". "
-                     f"Based on vulnerability knowledge base and evidence analysis.",
+                     "Based on vulnerability knowledge base and evidence analysis.",
             evidence_quality=evidence_quality,
             remediation_advice=remediation,
             attack_scenario=attack,

@@ -13,7 +13,6 @@ from app.core.database import get_db
 from app.dependencies import ActiveUser
 from app.models.scan import ScanStatus
 from app.schemas.scan import (
-    FindingListResponse,
     ScanCreateRequest,
     ScanListResponse,
     ScanResponse,

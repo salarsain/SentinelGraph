@@ -6,7 +6,6 @@ detect compound vulnerabilities, and adjust confidence scores.
 """
 
 from dataclasses import dataclass, field
-from collections import defaultdict
 
 import structlog
 

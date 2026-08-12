@@ -8,7 +8,6 @@ Adds contextual adjustments based on asset importance, exposure, and exploitabil
 import math
 import re
 from dataclasses import dataclass
-from typing import Any
 
 import structlog
 

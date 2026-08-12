@@ -5,12 +5,12 @@ Safe, evidence-based active security testing probes.
 All probes use BENIGN payloads only — no exploitation, no data extraction.
 """
 
-import re
 import asyncio
 import hashlib
+import re
 import time
 from dataclasses import dataclass, field
-from urllib.parse import urlparse, urlencode, parse_qs, urljoin
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import httpx
 import structlog
@@ -317,7 +317,7 @@ class CSRFProbe:
                 results.append(ProbeResult(
                     probe_name="csrf_missing",
                     severity="medium",
-                    title=f"Missing CSRF Protection",
+                    title="Missing CSRF Protection",
                     description=f"POST form at '{action_url}' lacks anti-CSRF token.",
                     url=url,
                     category="csrf",
@@ -626,7 +626,7 @@ class RateLimitProbe:
                     probe_name="rate_limit_missing",
                     severity="medium",
                     title="No Rate Limiting on Authentication Endpoint",
-                    description=f"Sent 15 requests without rate limiting. Brute-force attacks possible.",
+                    description="Sent 15 requests without rate limiting. Brute-force attacks possible.",
                     url=url, category="rate_limiting", confidence=0.75,
                     evidence={"requests_sent": 15, "all_status": status_codes[0]},
                     remediation="Implement rate limiting (e.g., 5 attempts per minute). Add CAPTCHA after failures.",

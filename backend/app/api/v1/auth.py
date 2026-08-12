@@ -8,7 +8,6 @@ from fastapi import APIRouter, status
 
 from app.dependencies import ActiveUser, AuthSvc
 from app.schemas.auth import (
-    MessageResponse,
     TokenPair,
     TokenRefreshRequest,
     UserLoginRequest,

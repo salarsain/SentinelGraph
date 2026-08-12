@@ -8,7 +8,7 @@ API key generation, and AES-GCM encryption for secrets at rest.
 import base64
 import os
 import secrets
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 from uuid import UUID
 
@@ -49,7 +49,7 @@ def create_access_token(
     expires_delta: timedelta | None = None,
 ) -> str:
     """Create a JWT access token."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     expire = now + (expires_delta or timedelta(minutes=settings.jwt_access_token_expire_minutes))
 
     to_encode: dict[str, Any] = {
@@ -66,7 +66,7 @@ def create_access_token(
 
 def create_refresh_token(subject: str | UUID) -> str:
     """Create a JWT refresh token with longer expiry."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     expire = now + timedelta(days=settings.jwt_refresh_token_expire_days)
 
     to_encode = {

@@ -7,7 +7,7 @@ All requests go through the Scope Enforcement Gateway.
 """
 
 import asyncio
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import structlog
 

@@ -127,7 +127,7 @@ class CookieAnalyzer:
                         cookie_name=name,
                         severity=FindingSeverity.MEDIUM,
                         finding_type=FindingType.COOKIE_INSECURE,
-                        title=f"Invalid __Host- Cookie Prefix Usage",
+                        title="Invalid __Host- Cookie Prefix Usage",
                         description=f"Cookie '{name}' uses __Host- prefix but doesn't meet requirements: {', '.join(issues)}.",
                         remediation="__Host- cookies must have Secure flag, Path=/, and no Domain attribute.",
                         evidence={"cookie_header": header[:200], "missing": issues},

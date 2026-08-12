@@ -6,14 +6,10 @@ Clients connect to /ws/scans/{scan_id} and receive JSON messages
 as the scan progresses through phases.
 """
 
-import json
-import uuid
 
 import structlog
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from app.core.database import get_db
 from app.core.redis import ScanProgressPublisher
 
 logger = structlog.get_logger(__name__)
@@ -80,7 +76,7 @@ async def scan_progress_ws(
     try:
         # Subscribe to Redis pub/sub for this scan
         publisher = ScanProgressPublisher()
-        pubsub = await publisher.subscribe(scan_id)
+        await publisher.subscribe(scan_id)
 
         # Send initial connection confirmation
         await websocket.send_json({

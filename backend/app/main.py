@@ -5,8 +5,8 @@ Main application factory with lifespan events, middleware,
 exception handlers, and route mounting.
 """
 
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 import structlog
 from fastapi import FastAPI, Request, status

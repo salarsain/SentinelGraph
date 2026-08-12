@@ -10,6 +10,7 @@ import structlog
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import get_settings
 from app.core.exceptions import (
     ConflictError,
     InvalidCredentialsError,
@@ -23,7 +24,6 @@ from app.core.security import (
     validate_refresh_token,
     verify_password,
 )
-from app.config import get_settings
 from app.models.user import User, UserRole
 from app.schemas.auth import (
     TokenPair,

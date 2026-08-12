@@ -8,13 +8,12 @@ for evidence and analysis.
 
 import time
 from dataclasses import dataclass, field
-from typing import Any
 
 import httpx
 import structlog
 
 from app.config import get_settings
-from app.engine.scope_gateway import ScopeEnforcementGateway, get_scope_gateway
+from app.engine.scope_gateway import get_scope_gateway
 from app.models.scope import AuthorizedScope
 
 logger = structlog.get_logger(__name__)
