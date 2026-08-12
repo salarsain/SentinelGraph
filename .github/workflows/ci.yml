@@ -10,6 +10,11 @@ env:
   PYTHON_VERSION: "3.11"
   NODE_VERSION: "20"
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 jobs:
   # ══════════════════════════════════════════════════════════
   # Backend Tests
@@ -170,7 +175,7 @@ jobs:
         run: npm audit --audit-level=high || true
 
       - name: SARIF upload (if exists)
-        if: always()
+        if: hashFiles('backend/cyberhackathon_report.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: backend/cyberhackathon_report.sarif
