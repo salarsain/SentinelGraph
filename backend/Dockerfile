@@ -1,7 +1,10 @@
 # ============================================================
 # SentinelGraph Backend — Dockerfile
 # ============================================================
-FROM python:3.11-slim AS base
+FROM python:3.11-slim-bookworm AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
 
 # System dependencies for Playwright, WeasyPrint, and crypto
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -15,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libcairo2 \
-    libgdk-pixbuf-2.0-0 \
+    libgdk-pixbuf2.0-0 \
     fonts-liberation \
     curl \
     git \
