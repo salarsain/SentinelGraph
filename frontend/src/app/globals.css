@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+/* ── SentinelGraph Design System ────────────────────────────── */
+
+:root {
+  /* Core Palette — Cyber Dark */
+  --sg-bg-primary: #0a0e1a;
+  --sg-bg-secondary: #111827;
+  --sg-bg-card: #1a1f2e;
+  --sg-bg-elevated: #232938;
+  --sg-bg-hover: #2a3148;
+
+  /* Accent Colors */
+  --sg-accent-primary: #6366f1;    /* Indigo */
+  --sg-accent-secondary: #8b5cf6;  /* Violet */
+  --sg-accent-cyan: #06b6d4;
+  --sg-accent-emerald: #10b981;
+
+  /* Severity Colors */
+  --sg-critical: #ef4444;
+  --sg-critical-glow: rgba(239, 68, 68, 0.15);
+  --sg-high: #f97316;
+  --sg-high-glow: rgba(249, 115, 22, 0.15);
+  --sg-medium: #eab308;
+  --sg-medium-glow: rgba(234, 179, 8, 0.15);
+  --sg-low: #3b82f6;
+  --sg-low-glow: rgba(59, 130, 246, 0.15);
+  --sg-info: #6b7280;
+  --sg-info-glow: rgba(107, 114, 128, 0.15);
+
+  /* Text */
+  --sg-text-primary: #f1f5f9;
+  --sg-text-secondary: #94a3b8;
+  --sg-text-muted: #64748b;
+
+  /* Borders */
+  --sg-border: rgba(255, 255, 255, 0.06);
+  --sg-border-hover: rgba(255, 255, 255, 0.12);
+  --sg-border-accent: rgba(99, 102, 241, 0.3);
+
+  /* Glassmorphism */
+  --sg-glass-bg: rgba(17, 24, 39, 0.7);
+  --sg-glass-border: rgba(255, 255, 255, 0.08);
+  --sg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* Gradient */
+  --sg-gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+  --sg-gradient-dark: linear-gradient(180deg, #0a0e1a 0%, #111827 100%);
+
+  /* Grid dot */
+  --sg-grid-dot: rgba(99, 102, 241, 0.05);
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--sg-bg-primary);
+  color: var(--sg-text-primary);
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Grid Background Pattern ───────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--sg-grid-dot) 1px, transparent 0);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Scrollbar Styling ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sg-text-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sg-text-secondary);
+}
+
+/* ── Typography ────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--sg-text-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* ── Glassmorphic Card ─────────────────────────────────────── */
+.glass-card {
+  background: var(--sg-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--sg-glass-border);
+  border-radius: 16px;
+  box-shadow: var(--sg-glass-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--sg-border-hover);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Severity Badge ────────────────────────────────────────── */
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.severity-critical {
+  background: var(--sg-critical-glow);
+  color: var(--sg-critical);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.severity-high {
+  background: var(--sg-high-glow);
+  color: var(--sg-high);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+.severity-medium {
+  background: var(--sg-medium-glow);
+  color: var(--sg-medium);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+.severity-low {
+  background: var(--sg-low-glow);
+  color: var(--sg-low);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.severity-info {
+  background: var(--sg-info-glow);
+  color: var(--sg-info);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* ── Glow Effects ──────────────────────────────────────────── */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15),
+              0 0 60px rgba(99, 102, 241, 0.05);
+}
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.15),
+              0 0 60px rgba(6, 182, 212, 0.05);
+}
+
+/* ── Pulse Animation ───────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── Scan Progress Bar ─────────────────────────────────────── */
+@keyframes progress-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--sg-bg-elevated);
+  overflow: hidden;
+  position: relative;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--sg-gradient-primary);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s linear infinite;
+  transition: width 0.5s ease-out;
+}
+
+/* ── Status Indicators ─────────────────────────────────────── */
+@keyframes status-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.4; }
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-dot-running {
+  background: var(--sg-accent-emerald);
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+.status-dot-complete {
+  background: var(--sg-accent-emerald);
+}
+.status-dot-failed {
+  background: var(--sg-critical);
+}
+.status-dot-pending {
+  background: var(--sg-text-muted);
+}
+
+/* ── Button Styles ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: var(--sg-gradient-primary);
+  color: white;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1px solid var(--sg-border);
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--sg-text-secondary);
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--sg-border-hover);
+  color: var(--sg-text-primary);
+  background: var(--sg-bg-hover);
+}
+
+/* ── Input Styles ──────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--sg-bg-elevated);
+  border: 1px solid var(--sg-border);
+  border-radius: 12px;
+  color: var(--sg-text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.input-field:focus {
+  border-color: var(--sg-accent-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.input-field::placeholder {
+  color: var(--sg-text-muted);
+}
+
+/* ── Chart Grid ────────────────────────────────────────────── */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* ── Skeleton Loading ──────────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--sg-bg-elevated) 25%,
+    var(--sg-bg-hover) 50%,
+    var(--sg-bg-elevated) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ── Fade-in Animation ─────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ── Stagger Animation ─────────────────────────────────────── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* ── Form Inputs ──────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--sg-bg-elevated);
+  border: 1px solid var(--sg-border);
+  border-radius: 10px;
+  color: var(--sg-text-primary);
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-field:focus {
+  border-color: var(--sg-accent-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.input-field::placeholder {
+  color: var(--sg-text-muted);
+}
+
+/* ── Ghost Button ─────────────────────────────────────────── */
+.btn-ghost {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--sg-border);
+  border-radius: 10px;
+  color: var(--sg-text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-ghost:hover {
+  background: var(--sg-bg-elevated);
+  border-color: var(--sg-border-hover);
+  color: var(--sg-text-primary);
+}
+
+/* ── Status Dot ───────────────────────────────────────────── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-dot-complete {
+  background: var(--sg-accent-emerald);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+.status-dot-running {
+  background: var(--sg-accent-cyan);
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+  animation: pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+

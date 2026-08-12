@@ -1,0 +1,403 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "SentinelGraph",
+          "version": "0.1.0",
+          "informationUri": "https://sentinelgraph.dev",
+          "rules": [
+            {
+              "id": "SG-0001",
+              "shortDescription": {
+                "text": "Missing Security Header: HSTS"
+              },
+              "fullDescription": {
+                "text": "The HSTS header is not set. This may weaken security posture."
+              },
+              "help": {
+                "text": "Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+                "markdown": "Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "SG-0002",
+              "shortDescription": {
+                "text": "Missing Security Header: CSP"
+              },
+              "fullDescription": {
+                "text": "The CSP header is not set. This may weaken security posture."
+              },
+              "help": {
+                "text": "Implement a strict Content-Security-Policy header to prevent XSS attacks.",
+                "markdown": "Implement a strict Content-Security-Policy header to prevent XSS attacks."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "SG-0003",
+              "shortDescription": {
+                "text": "Missing Security Header: X-XSS-Protection"
+              },
+              "fullDescription": {
+                "text": "The X-XSS-Protection header is not set. This may weaken security posture."
+              },
+              "help": {
+                "text": "Add header: X-XSS-Protection: 0 (modern browsers use CSP instead).",
+                "markdown": "Add header: X-XSS-Protection: 0 (modern browsers use CSP instead)."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0004",
+              "shortDescription": {
+                "text": "Missing Security Header: Permissions-Policy"
+              },
+              "fullDescription": {
+                "text": "The Permissions-Policy header is not set. This may weaken security posture."
+              },
+              "help": {
+                "text": "Add Permissions-Policy header to control browser features.",
+                "markdown": "Add Permissions-Policy header to control browser features."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0005",
+              "shortDescription": {
+                "text": "Missing Security Header: CORP"
+              },
+              "fullDescription": {
+                "text": "The CORP header is not set. This may weaken security posture."
+              },
+              "help": {
+                "text": "Add header: Cross-Origin-Resource-Policy: same-origin",
+                "markdown": "Add header: Cross-Origin-Resource-Policy: same-origin"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0006",
+              "shortDescription": {
+                "text": "Server Information Disclosure: server"
+              },
+              "fullDescription": {
+                "text": "The 'server' header reveals: cloudflare"
+              },
+              "help": {
+                "text": "Remove or obfuscate the 'server' header.",
+                "markdown": "Remove or obfuscate the 'server' header."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0007",
+              "shortDescription": {
+                "text": "Cookie 'csrftoken' Missing Secure Flag"
+              },
+              "fullDescription": {
+                "text": "Cookie 'csrftoken' can be sent over unencrypted HTTP."
+              },
+              "help": {
+                "text": "Add 'Secure' flag to cookie 'csrftoken'.",
+                "markdown": "Add 'Secure' flag to cookie 'csrftoken'."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "SG-0008",
+              "shortDescription": {
+                "text": "Sensitive Cookie 'csrftoken' Missing HttpOnly"
+              },
+              "fullDescription": {
+                "text": "Cookie 'csrftoken' is accessible to JavaScript (XSS risk)."
+              },
+              "help": {
+                "text": "Add 'HttpOnly' flag to cookie 'csrftoken'.",
+                "markdown": "Add 'HttpOnly' flag to cookie 'csrftoken'."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "SG-0009",
+              "shortDescription": {
+                "text": "Password Autocomplete Enabled"
+              },
+              "fullDescription": {
+                "text": "Password field allows browser autocomplete."
+              },
+              "help": {
+                "text": "Add autocomplete=\"off\" to password inputs.",
+                "markdown": "Add autocomplete=\"off\" to password inputs."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0010",
+              "shortDescription": {
+                "text": "WordPress Config Exposed - Blocked (/wp-config.php)"
+              },
+              "fullDescription": {
+                "text": "Path /wp-config.php exists but returns 403 Forbidden."
+              },
+              "help": {
+                "text": "Verify this path should be accessible.",
+                "markdown": "Verify this path should be accessible."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0011",
+              "shortDescription": {
+                "text": "Robots.txt (/robots.txt)"
+              },
+              "fullDescription": {
+                "text": "Accessible at https://cyberhackathon.pk/robots.txt \u2014 returned 200 with 1248 bytes."
+              },
+              "help": {
+                "text": "Restrict access to /robots.txt or remove from web root.",
+                "markdown": "Restrict access to /robots.txt or remove from web root."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "SG-0012",
+              "shortDescription": {
+                "text": "Apache Status - Blocked (/server-status)"
+              },
+              "fullDescription": {
+                "text": "Path /server-status exists but returns 403 Forbidden."
+              },
+              "help": {
+                "text": "Verify this path should be accessible.",
+                "markdown": "Verify this path should be accessible."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SG-0001",
+          "message": {
+            "text": "The HSTS header is not set. This may weaken security posture."
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0002",
+          "message": {
+            "text": "The CSP header is not set. This may weaken security posture."
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0003",
+          "message": {
+            "text": "The X-XSS-Protection header is not set. This may weaken security posture."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0004",
+          "message": {
+            "text": "The Permissions-Policy header is not set. This may weaken security posture."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0005",
+          "message": {
+            "text": "The CORP header is not set. This may weaken security posture."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0006",
+          "message": {
+            "text": "The 'server' header reveals: cloudflare"
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0007",
+          "message": {
+            "text": "Cookie 'csrftoken' can be sent over unencrypted HTTP."
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0008",
+          "message": {
+            "text": "Cookie 'csrftoken' is accessible to JavaScript (XSS risk)."
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0009",
+          "message": {
+            "text": "Password field allows browser autocomplete."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/admin/login/"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0010",
+          "message": {
+            "text": "Path /wp-config.php exists but returns 403 Forbidden."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/wp-config.php"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0011",
+          "message": {
+            "text": "Accessible at https://cyberhackathon.pk/robots.txt \u2014 returned 200 with 1248 bytes."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/robots.txt"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SG-0012",
+          "message": {
+            "text": "Path /server-status exists but returns 403 Forbidden."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://cyberhackathon.pk/server-status"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

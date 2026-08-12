@@ -1,0 +1,786 @@
+{
+  "target": "https://fake-news-detector-393.pages.dev/",
+  "started_at": "2026-08-12T20:15:33.385425Z",
+  "completed_at": "2026-08-12T20:15:39.134517Z",
+  "duration_seconds": 5.7,
+  "status": "complete",
+  "technologies": [
+    "Cloudflare"
+  ],
+  "headers_grade": "F",
+  "ssl_info": {
+    "issuer": "Let's Encrypt",
+    "subject": "fake-news-detector-393.pages.dev",
+    "valid_from": "Jul 15 00:18:33 2026 GMT",
+    "valid_to": "Oct 13 00:18:32 2026 GMT"
+  },
+  "pages_crawled": 3,
+  "urls_discovered": 2,
+  "parameters_found": 1,
+  "total_findings": 19,
+  "severity_counts": {
+    "critical": 2,
+    "high": 1,
+    "medium": 5,
+    "low": 4,
+    "info": 7
+  },
+  "findings": [
+    {
+      "id": "F-0001",
+      "severity": "medium",
+      "title": "Missing: HSTS",
+      "description": "HSTS header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "strict-transport-security"
+      },
+      "remediation": "Add: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0002",
+      "severity": "medium",
+      "title": "Missing: CSP",
+      "description": "CSP header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "content-security-policy"
+      },
+      "remediation": "Implement a strict Content-Security-Policy to prevent XSS.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0003",
+      "severity": "medium",
+      "title": "Missing: X-Frame-Options",
+      "description": "X-Frame-Options header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "x-frame-options"
+      },
+      "remediation": "Add: X-Frame-Options: DENY or SAMEORIGIN",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0004",
+      "severity": "low",
+      "title": "Missing: Permissions-Policy",
+      "description": "Permissions-Policy header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "permissions-policy"
+      },
+      "remediation": "Add Permissions-Policy to control browser features.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0005",
+      "severity": "info",
+      "title": "Missing: COOP",
+      "description": "COOP header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "cross-origin-opener-policy"
+      },
+      "remediation": "Add: Cross-Origin-Opener-Policy: same-origin",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0006",
+      "severity": "info",
+      "title": "Missing: CORP",
+      "description": "CORP header not set.",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "cross-origin-resource-policy"
+      },
+      "remediation": "Add: Cross-Origin-Resource-Policy: same-origin",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0007",
+      "severity": "low",
+      "title": "Info Disclosure: server",
+      "description": "'server' reveals: cloudflare",
+      "url": "https://fake-news-detector-393.pages.dev/",
+      "category": "info_disclosure",
+      "confidence": 0.9,
+      "evidence": {
+        "header": "server",
+        "value": "cloudflare"
+      },
+      "remediation": "Remove 'server' header.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0008",
+      "severity": "critical",
+      "title": "Git Repository Exposed (/.git/HEAD)",
+      "description": "Accessible: /.git/HEAD (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/.git/HEAD",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /.git/HEAD.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0009",
+      "severity": "critical",
+      "title": "Environment File Exposed (/.env)",
+      "description": "Accessible: /.env (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/.env",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /.env.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0010",
+      "severity": "info",
+      "title": "Robots.txt (/robots.txt)",
+      "description": "Accessible: /robots.txt (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/robots.txt",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /robots.txt.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0011",
+      "severity": "info",
+      "title": "Sitemap (/sitemap.xml)",
+      "description": "Accessible: /sitemap.xml (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/sitemap.xml",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /sitemap.xml.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0012",
+      "severity": "info",
+      "title": "Security.txt (/.well-known/security.txt)",
+      "description": "Accessible: /.well-known/security.txt (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/.well-known/security.txt",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /.well-known/security.txt.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0013",
+      "severity": "medium",
+      "title": "PHP Info Page (/phpinfo.php)",
+      "description": "Accessible: /phpinfo.php (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/phpinfo.php",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /phpinfo.php.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0014",
+      "severity": "info",
+      "title": "Admin Panel (/admin)",
+      "description": "Accessible: /admin (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/admin",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /admin.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0015",
+      "severity": "medium",
+      "title": "Debug Endpoint (/debug)",
+      "description": "Accessible: /debug (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/debug",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /debug.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0016",
+      "severity": "high",
+      "title": "SVN Exposed (/.svn/entries)",
+      "description": "Accessible: /.svn/entries (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/.svn/entries",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /.svn/entries.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0017",
+      "severity": "low",
+      "title": "Swagger Spec (/swagger.json)",
+      "description": "Accessible: /swagger.json (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/swagger.json",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /swagger.json.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0018",
+      "severity": "low",
+      "title": "GraphQL Endpoint (/graphql)",
+      "description": "Accessible: /graphql (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/graphql",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /graphql.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0019",
+      "severity": "info",
+      "title": "API Endpoint (/api/)",
+      "description": "Accessible: /api/ (200, 408b)",
+      "url": "https://fake-news-detector-393.pages.dev/api/",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 408
+      },
+      "remediation": "Restrict access to /api/.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    }
+  ],
+  "risk_scores": [
+    {
+      "finding_id": "F-0001",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0002",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0003",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0004",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0005",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0006",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 3.8,
+      "risk_level": "low",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0007",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0008",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0009",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0010",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0011",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0012",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0013",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0014",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.4,
+      "final_risk_score": 9.0,
+      "risk_level": "critical",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.4,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0015",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0016",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0017",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0018",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0019",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.2,
+      "final_risk_score": 7.7,
+      "risk_level": "high",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.2,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare"
+        ]
+      }
+    }
+  ]
+}

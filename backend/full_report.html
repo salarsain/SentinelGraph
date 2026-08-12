@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinelGraph — Security Report: https://fake-news-detector-393.pages.dev/</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --critical: #ef4444;
+    --high: #f97316;
+    --medium: #eab308;
+    --low: #3b82f6;
+    --info: #6b7280;
+    --emerald: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', 'Segoe UI', sans-serif; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+  .header { text-align: center; margin-bottom: 48px; padding: 40px; background: var(--surface); border-radius: 16px; border: 1px solid var(--border); }
+  .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: var(--accent); }
+  .header .target { font-family: monospace; font-size: 1.1rem; color: var(--emerald); margin-bottom: 16px; }
+  .header .meta { display: flex; justify-content: center; gap: 24px; font-size: 0.8rem; color: var(--text-muted); }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .metric-card .value { font-size: 2rem; font-weight: 700; }
+  .metric-card .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .severity-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 16px 0; }
+  .severity-bar div { transition: width 0.5s ease; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+  .section h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .finding { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .finding:hover { border-color: var(--accent); }
+  .finding-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .badge { padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--critical); border: 1px solid rgba(239,68,68,0.3); }
+  .badge-high { background: rgba(249,115,22,0.15); color: var(--high); border: 1px solid rgba(249,115,22,0.3); }
+  .badge-medium { background: rgba(234,179,8,0.15); color: var(--medium); border: 1px solid rgba(234,179,8,0.3); }
+  .badge-low { background: rgba(59,130,246,0.15); color: var(--low); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-info { background: rgba(107,114,128,0.15); color: var(--info); border: 1px solid rgba(107,114,128,0.3); }
+  .finding-title { font-weight: 600; font-size: 0.95rem; }
+  .finding-desc { font-size: 0.8rem; color: var(--text-muted); margin: 8px 0; }
+  .finding-url { font-family: monospace; font-size: 0.75rem; color: var(--emerald); word-break: break-all; }
+  .remediation { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); border-radius: 8px; padding: 12px; margin-top: 12px; }
+  .remediation-label { font-size: 0.7rem; font-weight: 600; color: var(--emerald); text-transform: uppercase; margin-bottom: 4px; }
+  .remediation-text { font-size: 0.8rem; color: var(--text); }
+  .tech-tag { display: inline-block; padding: 4px 12px; background: rgba(99,102,241,0.1); color: var(--accent); border: 1px solid rgba(99,102,241,0.2); border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin: 2px; }
+  .ssl-row { display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 4px; }
+  .ssl-label { font-size: 0.75rem; color: var(--text-muted); }
+  .ssl-value { font-size: 0.8rem; font-weight: 500; }
+  .footer { text-align: center; padding: 32px; font-size: 0.75rem; color: var(--text-muted); }
+  @media print { body { background: white; color: #1a1a1a; } .container { max-width: 100%; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🛡️ SentinelGraph Security Report</h1>
+    <div class="target">https://fake-news-detector-393.pages.dev/</div>
+    <div class="meta">
+      <span>📅 2026-08-12 20:15 UTC</span>
+      <span>⏱ Duration: 2026-08-12T20:15:33.385425Z → 2026-08-12T20:15:39.134517Z</span>
+      <span>📄 3 pages probed</span>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="value" style="color: var(--accent);">19</div>
+      <div class="label">Total Findings</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--critical);">2</div>
+      <div class="label">Critical</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--high);">1</div>
+      <div class="label">High</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--medium);">5</div>
+      <div class="label">Medium</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Severity Distribution</h2>
+    <div class="severity-bar">
+      
+      <div style="width: 10.526315789473683%; background: var(--critical);"></div>
+      
+      <div style="width: 5.263157894736842%; background: var(--high);"></div>
+      
+      <div style="width: 26.31578947368421%; background: var(--medium);"></div>
+      
+      <div style="width: 21.052631578947366%; background: var(--low);"></div>
+      
+      <div style="width: 36.84210526315789%; background: var(--info);"></div>
+      
+    </div>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--critical);">● Critical: 2</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--high);">● High: 1</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--medium);">● Medium: 5</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--low);">● Low: 4</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--info);">● Info: 7</span>
+    
+  </div>
+
+  
+  <div class="section">
+    <h2>Detected Technologies</h2>
+    
+    <span class="tech-tag">Cloudflare</span>
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>SSL/TLS Certificate</h2>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Issuer</span>
+      <span class="ssl-value" style="color: var(--emerald);">Let's Encrypt</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Subject</span>
+      <span class="ssl-value" style="color: var(--emerald);">fake-news-detector-393.pages.dev</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Valid From</span>
+      <span class="ssl-value" style="color: var(--emerald);">Jul 15 00:18:33 2026 GMT</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Valid To</span>
+      <span class="ssl-value" style="color: var(--emerald);">Oct 13 00:18:32 2026 GMT</span>
+    </div>
+    
+  </div>
+  
+
+  <div class="section">
+    <h2>Security Headers Grade: F</h2>
+    <div style="font-size: 3rem; text-align: center; font-weight: 700; color: var(--high);">
+      F
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Findings (19)</h2>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Missing: HSTS</span>
+      </div>
+      <div class="finding-desc">HSTS header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Missing: CSP</span>
+      </div>
+      <div class="finding-desc">CSP header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Implement a strict Content-Security-Policy to prevent XSS.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Missing: X-Frame-Options</span>
+      </div>
+      <div class="finding-desc">X-Frame-Options header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add: X-Frame-Options: DENY or SAMEORIGIN</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">Missing: Permissions-Policy</span>
+      </div>
+      <div class="finding-desc">Permissions-Policy header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add Permissions-Policy to control browser features.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Missing: COOP</span>
+      </div>
+      <div class="finding-desc">COOP header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add: Cross-Origin-Opener-Policy: same-origin</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Missing: CORP</span>
+      </div>
+      <div class="finding-desc">CORP header not set.</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add: Cross-Origin-Resource-Policy: same-origin</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">Info Disclosure: server</span>
+      </div>
+      <div class="finding-desc">'server' reveals: cloudflare</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Remove 'server' header.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-critical">critical</span>
+        <span class="finding-title">Git Repository Exposed (/.git/HEAD)</span>
+      </div>
+      <div class="finding-desc">Accessible: /.git/HEAD (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/.git/HEAD</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /.git/HEAD.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-critical">critical</span>
+        <span class="finding-title">Environment File Exposed (/.env)</span>
+      </div>
+      <div class="finding-desc">Accessible: /.env (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/.env</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /.env.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Robots.txt (/robots.txt)</span>
+      </div>
+      <div class="finding-desc">Accessible: /robots.txt (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/robots.txt</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /robots.txt.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Sitemap (/sitemap.xml)</span>
+      </div>
+      <div class="finding-desc">Accessible: /sitemap.xml (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/sitemap.xml</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /sitemap.xml.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Security.txt (/.well-known/security.txt)</span>
+      </div>
+      <div class="finding-desc">Accessible: /.well-known/security.txt (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/.well-known/security.txt</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /.well-known/security.txt.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">PHP Info Page (/phpinfo.php)</span>
+      </div>
+      <div class="finding-desc">Accessible: /phpinfo.php (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/phpinfo.php</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /phpinfo.php.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Admin Panel (/admin)</span>
+      </div>
+      <div class="finding-desc">Accessible: /admin (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/admin</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /admin.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Debug Endpoint (/debug)</span>
+      </div>
+      <div class="finding-desc">Accessible: /debug (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/debug</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /debug.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-high">high</span>
+        <span class="finding-title">SVN Exposed (/.svn/entries)</span>
+      </div>
+      <div class="finding-desc">Accessible: /.svn/entries (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/.svn/entries</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /.svn/entries.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">Swagger Spec (/swagger.json)</span>
+      </div>
+      <div class="finding-desc">Accessible: /swagger.json (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/swagger.json</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /swagger.json.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">GraphQL Endpoint (/graphql)</span>
+      </div>
+      <div class="finding-desc">Accessible: /graphql (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/graphql</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /graphql.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">API Endpoint (/api/)</span>
+      </div>
+      <div class="finding-desc">Accessible: /api/ (200, 408b)</div>
+      <div class="finding-url">https://fake-news-detector-393.pages.dev/api/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /api/.</div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <div class="footer">
+    <p>Generated by SentinelGraph 0.1.0</p>
+    <p>This report is confidential and intended for authorized personnel only.</p>
+  </div>
+</div>
+</body>
+</html>

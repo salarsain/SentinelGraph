@@ -1,0 +1,205 @@
+name: Daily Security Scan — cyberhackathon.pk
+
+# ═══════════════════════════════════════════════════════════════
+# Runs SentinelGraph scanner against cyberhackathon.pk every day
+# Results are saved as artifacts + posted to GitHub Step Summary
+# ═══════════════════════════════════════════════════════════════
+
+on:
+  # Daily at 3:00 AM Pakistan time (UTC+5 → 22:00 UTC previous day)
+  schedule:
+    - cron: "0 22 * * *"
+
+  # Manual trigger with options
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "Target URL to scan"
+        required: true
+        default: "https://cyberhackathon.pk"
+      scan_type:
+        description: "Scan type"
+        required: true
+        default: "full"
+        type: choice
+        options:
+          - full
+          - quick
+
+env:
+  PYTHON_VERSION: "3.11"
+  DEFAULT_TARGET: "https://cyberhackathon.pk"
+
+jobs:
+  # ══════════════════════════════════════════════════════════════
+  # Security Scan
+  # ══════════════════════════════════════════════════════════════
+  security-scan:
+    name: "🛡️ Security Scan"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    outputs:
+      total_findings: ${{ steps.scan.outputs.total_findings }}
+      critical_count: ${{ steps.scan.outputs.critical_count }}
+      high_count: ${{ steps.scan.outputs.high_count }}
+      scan_status: ${{ steps.scan.outputs.scan_status }}
+
+    steps:
+      - name: "📥 Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "🐍 Set up Python ${{ env.PYTHON_VERSION }}"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: "📦 Cache pip dependencies"
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-scanner-${{ runner.os }}-${{ hashFiles('backend/requirements*.txt', 'backend/pyproject.toml') }}
+          restore-keys: |
+            pip-scanner-${{ runner.os }}-
+
+      - name: "🔧 Install scanner dependencies"
+        run: |
+          pip install --upgrade pip
+          pip install fastapi uvicorn httpx structlog jinja2
+          # Install any additional deps from pyproject.toml if available
+          if [ -f "pyproject.toml" ]; then
+            pip install -e "." 2>/dev/null || true
+          fi
+
+      - name: "🔍 Run Security Scan"
+        id: scan
+        env:
+          AI_MODE: rule_based
+          HF_API_TOKEN: ${{ secrets.HF_API_TOKEN }}
+        run: |
+          TARGET="${{ github.event.inputs.target_url || env.DEFAULT_TARGET }}"
+          SCAN_TYPE="${{ github.event.inputs.scan_type || 'full' }}"
+
+          echo "🎯 Scanning: $TARGET (type: $SCAN_TYPE)"
+          python scan_cli.py "$TARGET" --type "$SCAN_TYPE" --output ./scan_output
+
+      - name: "📤 Upload scan results"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-scan-results-${{ github.run_number }}
+          path: |
+            backend/scan_output/*.json
+            backend/scan_output/*.html
+            backend/scan_output/*.md
+          retention-days: 90
+
+      - name: "📊 Post results to PR (if applicable)"
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: backend/scan_output/scan_summary_*.md
+        continue-on-error: true
+
+  # ══════════════════════════════════════════════════════════════
+  # Alert on Critical/High Findings
+  # ══════════════════════════════════════════════════════════════
+  alert:
+    name: "🚨 Alert on Findings"
+    runs-on: ubuntu-latest
+    needs: security-scan
+    if: needs.security-scan.outputs.critical_count > 0 || needs.security-scan.outputs.high_count > 0
+
+    steps:
+      - name: "⚠️ Critical/High findings detected"
+        run: |
+          echo "═══════════════════════════════════════════════════════"
+          echo "  🚨 SECURITY ALERT — Critical/High findings detected!"
+          echo "  Critical: ${{ needs.security-scan.outputs.critical_count }}"
+          echo "  High:     ${{ needs.security-scan.outputs.high_count }}"
+          echo "  Total:    ${{ needs.security-scan.outputs.total_findings }}"
+          echo "═══════════════════════════════════════════════════════"
+          echo ""
+          echo "Review the scan report in the workflow artifacts."
+
+      - name: "📧 Create GitHub Issue for findings"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const critical = ${{ needs.security-scan.outputs.critical_count || 0 }};
+            const high = ${{ needs.security-scan.outputs.high_count || 0 }};
+            const total = ${{ needs.security-scan.outputs.total_findings || 0 }};
+            const date = new Date().toISOString().split('T')[0];
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Security Alert: ${critical} critical, ${high} high findings (${date})`,
+              body: `## Daily Security Scan Results\n\n` +
+                    `**Date:** ${date}\n` +
+                    `**Target:** https://cyberhackathon.pk\n\n` +
+                    `### Findings\n` +
+                    `| Severity | Count |\n` +
+                    `|----------|-------|\n` +
+                    `| 🔴 Critical | ${critical} |\n` +
+                    `| 🟠 High | ${high} |\n` +
+                    `| **Total** | **${total}** |\n\n` +
+                    `### Action Required\n` +
+                    `Review the [scan report](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) and remediate findings.\n\n` +
+                    `---\n_Auto-generated by SentinelGraph Daily Security Scan_`,
+              labels: ['security', 'automated-scan']
+            });
+        continue-on-error: true
+
+  # ══════════════════════════════════════════════════════════════
+  # History Tracking
+  # ══════════════════════════════════════════════════════════════
+  track-history:
+    name: "📈 Track Scan History"
+    runs-on: ubuntu-latest
+    needs: security-scan
+    if: always()
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "📥 Download scan results"
+        uses: actions/download-artifact@v4
+        with:
+          name: security-scan-results-${{ github.run_number }}
+          path: ./scan_results
+
+      - name: "📈 Update scan history"
+        run: |
+          mkdir -p docs/scan-history
+          DATE=$(date +%Y-%m-%d)
+
+          # Copy latest results to history
+          cp ./scan_results/*.json "docs/scan-history/scan_${DATE}.json" 2>/dev/null || true
+          cp ./scan_results/*.md "docs/scan-history/report_${DATE}.md" 2>/dev/null || true
+
+          # Generate history index
+          echo "# 🛡️ SentinelGraph Scan History" > docs/scan-history/README.md
+          echo "" >> docs/scan-history/README.md
+          echo "| Date | Report |" >> docs/scan-history/README.md
+          echo "|------|--------|" >> docs/scan-history/README.md
+          for f in docs/scan-history/report_*.md; do
+            if [ -f "$f" ]; then
+              fname=$(basename "$f")
+              scan_date=$(echo "$fname" | sed 's/report_//;s/\.md//')
+              echo "| ${scan_date} | [Report](./${fname}) |" >> docs/scan-history/README.md
+            fi
+          done
+
+      - name: "💾 Commit scan history"
+        run: |
+          git config user.name "SentinelGraph Bot"
+          git config user.email "bot@sentinelgraph.local"
+          git add docs/scan-history/ || true
+          git diff --staged --quiet || git commit -m "📊 Daily scan: $(date +%Y-%m-%d) — ${{ needs.security-scan.outputs.total_findings }} findings"
+          git push || true
+        continue-on-error: true

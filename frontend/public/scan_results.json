@@ -1,0 +1,629 @@
+{
+  "target": "https://cyberhackathon.pk/admin/login/",
+  "started_at": "2026-08-12T19:17:03.223587Z",
+  "completed_at": "2026-08-12T19:17:33.618597Z",
+  "duration_seconds": 30.4,
+  "status": "complete",
+  "technologies": [
+    "Cloudflare",
+    "Django",
+    "Bootstrap"
+  ],
+  "headers_grade": "C",
+  "ssl_info": {
+    "issuer": "Google Trust Services",
+    "subject": "cyberhackathon.pk",
+    "valid_from": "Jun 25 09:08:02 2026 GMT",
+    "valid_to": "Sep 23 10:07:46 2026 GMT"
+  },
+  "pages_crawled": 6,
+  "urls_discovered": 5,
+  "parameters_found": 4,
+  "total_findings": 14,
+  "severity_counts": {
+    "critical": 4,
+    "high": 0,
+    "medium": 5,
+    "low": 2,
+    "info": 3
+  },
+  "findings": [
+    {
+      "id": "F-0001",
+      "severity": "medium",
+      "title": "Missing: HSTS",
+      "description": "HSTS header not set.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "strict-transport-security"
+      },
+      "remediation": "Add: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0002",
+      "severity": "medium",
+      "title": "Missing: CSP",
+      "description": "CSP header not set.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "content-security-policy"
+      },
+      "remediation": "Implement a strict Content-Security-Policy to prevent XSS.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0003",
+      "severity": "low",
+      "title": "Missing: Permissions-Policy",
+      "description": "Permissions-Policy header not set.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "permissions-policy"
+      },
+      "remediation": "Add Permissions-Policy to control browser features.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0004",
+      "severity": "info",
+      "title": "Missing: CORP",
+      "description": "CORP header not set.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "confidence": 0.95,
+      "evidence": {
+        "header": "cross-origin-resource-policy"
+      },
+      "remediation": "Add: Cross-Origin-Resource-Policy: same-origin",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0005",
+      "severity": "low",
+      "title": "Info Disclosure: server",
+      "description": "'server' reveals: cloudflare",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "info_disclosure",
+      "confidence": 0.975,
+      "evidence": {
+        "header": "server",
+        "value": "cloudflare"
+      },
+      "remediation": "Remove 'server' header.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.075,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0006",
+      "severity": "medium",
+      "title": "Cookie 'csrftoken' Missing Secure",
+      "description": "Cookie 'csrftoken' sent over HTTP.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "cookie",
+      "confidence": 0.9,
+      "evidence": {
+        "cookie": "csrftoken"
+      },
+      "remediation": "Add Secure flag to 'csrftoken'.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0007",
+      "severity": "medium",
+      "title": "Cookie 'csrftoken' Missing HttpOnly",
+      "description": "Cookie 'csrftoken' accessible to JS.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "cookie",
+      "confidence": 0.9,
+      "evidence": {
+        "cookie": "csrftoken"
+      },
+      "remediation": "Add HttpOnly to 'csrftoken'.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0008",
+      "severity": "info",
+      "title": "Robots.txt (/robots.txt)",
+      "description": "Accessible: /robots.txt (200, 1248b)",
+      "url": "https://cyberhackathon.pk/robots.txt",
+      "category": "sensitive_path",
+      "confidence": 0.85,
+      "evidence": {
+        "status": 200,
+        "size": 1248
+      },
+      "remediation": "Restrict access to /robots.txt.",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0009",
+      "severity": "critical",
+      "title": "Template Injection (Jinja2/Twig) in 'viewport'",
+      "description": "Server evaluates template expression in 'viewport' \u2014 SSTI confirmed.",
+      "url": "https://cyberhackathon.pk/admin/login/?viewport=%7B%7B7%2A7%7D%7D",
+      "category": "ssti",
+      "confidence": 0.99,
+      "evidence": {
+        "parameter": "viewport",
+        "probe": "{{7*7}}",
+        "expected": "49",
+        "engine_hint": "Jinja2/Twig"
+      },
+      "remediation": "Never render user input as template code. Use sandboxed template engines.",
+      "cvss_score": 9.8,
+      "correlated_with": [
+        "F-0005"
+      ],
+      "confidence_adjustment": 0.15,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0010",
+      "severity": "critical",
+      "title": "Template Injection (Jinja2/Twig) in 'csrfmiddlewaretoken'",
+      "description": "Server evaluates template expression in 'csrfmiddlewaretoken' \u2014 SSTI confirmed.",
+      "url": "https://cyberhackathon.pk/admin/login/?csrfmiddlewaretoken=%7B%7B7%2A7%7D%7D",
+      "category": "ssti",
+      "confidence": 0.99,
+      "evidence": {
+        "parameter": "csrfmiddlewaretoken",
+        "probe": "{{7*7}}",
+        "expected": "49",
+        "engine_hint": "Jinja2/Twig"
+      },
+      "remediation": "Never render user input as template code. Use sandboxed template engines.",
+      "cvss_score": 9.8,
+      "correlated_with": [
+        "F-0005"
+      ],
+      "confidence_adjustment": 0.15,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0011",
+      "severity": "critical",
+      "title": "Template Injection (Jinja2/Twig) in 'username'",
+      "description": "Server evaluates template expression in 'username' \u2014 SSTI confirmed.",
+      "url": "https://cyberhackathon.pk/admin/login/?username=%7B%7B7%2A7%7D%7D",
+      "category": "ssti",
+      "confidence": 0.99,
+      "evidence": {
+        "parameter": "username",
+        "probe": "{{7*7}}",
+        "expected": "49",
+        "engine_hint": "Jinja2/Twig"
+      },
+      "remediation": "Never render user input as template code. Use sandboxed template engines.",
+      "cvss_score": 9.8,
+      "correlated_with": [
+        "F-0005"
+      ],
+      "confidence_adjustment": 0.15,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0012",
+      "severity": "critical",
+      "title": "Template Injection (Jinja2/Twig) in 'password'",
+      "description": "Server evaluates template expression in 'password' \u2014 SSTI confirmed.",
+      "url": "https://cyberhackathon.pk/admin/login/?password=%7B%7B7%2A7%7D%7D",
+      "category": "ssti",
+      "confidence": 0.99,
+      "evidence": {
+        "parameter": "password",
+        "probe": "{{7*7}}",
+        "expected": "49",
+        "engine_hint": "Jinja2/Twig"
+      },
+      "remediation": "Never render user input as template code. Use sandboxed template engines.",
+      "cvss_score": 9.8,
+      "correlated_with": [
+        "F-0005"
+      ],
+      "confidence_adjustment": 0.15,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0013",
+      "severity": "medium",
+      "title": "No Rate Limiting on Authentication Endpoint",
+      "description": "Sent 15 requests without rate limiting. Brute-force attacks possible.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "rate_limiting",
+      "confidence": 0.75,
+      "evidence": {
+        "requests_sent": 15,
+        "all_status": 200
+      },
+      "remediation": "Implement rate limiting (e.g., 5 attempts per minute). Add CAPTCHA after failures.",
+      "cvss_score": 5.3,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    },
+    {
+      "id": "F-0015",
+      "severity": "info",
+      "title": "Password Autocomplete Enabled",
+      "description": "Password field allows autocomplete.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "best_practice",
+      "confidence": 0.8,
+      "evidence": {},
+      "remediation": "Add autocomplete=\"off\".",
+      "cvss_score": null,
+      "correlated_with": [],
+      "confidence_adjustment": 0.0,
+      "chain_id": null,
+      "is_duplicate": false,
+      "original_finding_id": null
+    }
+  ],
+  "risk_scores": [
+    {
+      "finding_id": "F-0001",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 4.9,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0002",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 4.9,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0003",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 4.9,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0004",
+      "cvss_base": 3.1,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 3.1,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 4.9,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 3.1,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0005",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 8.3,
+      "risk_level": "high",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0006",
+      "cvss_base": 4.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 4.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 6.8,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 4.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0007",
+      "cvss_base": 4.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "contextual_score": 4.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 6.8,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 4.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0008",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.0,
+      "final_risk_score": 6.4,
+      "risk_level": "medium",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.0,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0009",
+      "cvss_base": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "contextual_score": 9.8,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 10.0,
+      "risk_level": "critical",
+      "breakdown": {
+        "cvss_base": 9.8,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0010",
+      "cvss_base": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "contextual_score": 9.8,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 10.0,
+      "risk_level": "critical",
+      "breakdown": {
+        "cvss_base": 9.8,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0011",
+      "cvss_base": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "contextual_score": 9.8,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 10.0,
+      "risk_level": "critical",
+      "breakdown": {
+        "cvss_base": 9.8,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0012",
+      "cvss_base": 9.8,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "contextual_score": 9.8,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 10.0,
+      "risk_level": "critical",
+      "breakdown": {
+        "cvss_base": 9.8,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0013",
+      "cvss_base": 5.3,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "contextual_score": 5.3,
+      "exploitability_factor": 1.0,
+      "asset_importance": 1.3,
+      "final_risk_score": 7.6,
+      "risk_level": "high",
+      "breakdown": {
+        "cvss_base": 5.3,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.0,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    },
+    {
+      "finding_id": "F-0015",
+      "cvss_base": 0.0,
+      "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+      "contextual_score": 0.0,
+      "exploitability_factor": 1.1,
+      "asset_importance": 1.3,
+      "final_risk_score": 0.0,
+      "risk_level": "info",
+      "breakdown": {
+        "cvss_base": 0.0,
+        "tech_modifier": 0.0,
+        "asset_factor": 1.3,
+        "exploit_factor": 1.1,
+        "env_factor": 1.1,
+        "technologies": [
+          "Cloudflare",
+          "Django",
+          "Bootstrap"
+        ]
+      }
+    }
+  ]
+}

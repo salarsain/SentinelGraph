@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinelGraph — Security Report: https://cyberhackathon.pk/admin/login/</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --critical: #ef4444;
+    --high: #f97316;
+    --medium: #eab308;
+    --low: #3b82f6;
+    --info: #6b7280;
+    --emerald: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', 'Segoe UI', sans-serif; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+  .header { text-align: center; margin-bottom: 48px; padding: 40px; background: var(--surface); border-radius: 16px; border: 1px solid var(--border); }
+  .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: var(--accent); }
+  .header .target { font-family: monospace; font-size: 1.1rem; color: var(--emerald); margin-bottom: 16px; }
+  .header .meta { display: flex; justify-content: center; gap: 24px; font-size: 0.8rem; color: var(--text-muted); }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .metric-card .value { font-size: 2rem; font-weight: 700; }
+  .metric-card .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .severity-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 16px 0; }
+  .severity-bar div { transition: width 0.5s ease; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+  .section h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .finding { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .finding:hover { border-color: var(--accent); }
+  .finding-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .badge { padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+  .badge-critical { background: rgba(239,68,68,0.15); color: var(--critical); border: 1px solid rgba(239,68,68,0.3); }
+  .badge-high { background: rgba(249,115,22,0.15); color: var(--high); border: 1px solid rgba(249,115,22,0.3); }
+  .badge-medium { background: rgba(234,179,8,0.15); color: var(--medium); border: 1px solid rgba(234,179,8,0.3); }
+  .badge-low { background: rgba(59,130,246,0.15); color: var(--low); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-info { background: rgba(107,114,128,0.15); color: var(--info); border: 1px solid rgba(107,114,128,0.3); }
+  .finding-title { font-weight: 600; font-size: 0.95rem; }
+  .finding-desc { font-size: 0.8rem; color: var(--text-muted); margin: 8px 0; }
+  .finding-url { font-family: monospace; font-size: 0.75rem; color: var(--emerald); word-break: break-all; }
+  .remediation { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); border-radius: 8px; padding: 12px; margin-top: 12px; }
+  .remediation-label { font-size: 0.7rem; font-weight: 600; color: var(--emerald); text-transform: uppercase; margin-bottom: 4px; }
+  .remediation-text { font-size: 0.8rem; color: var(--text); }
+  .tech-tag { display: inline-block; padding: 4px 12px; background: rgba(99,102,241,0.1); color: var(--accent); border: 1px solid rgba(99,102,241,0.2); border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin: 2px; }
+  .ssl-row { display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 4px; }
+  .ssl-label { font-size: 0.75rem; color: var(--text-muted); }
+  .ssl-value { font-size: 0.8rem; font-weight: 500; }
+  .footer { text-align: center; padding: 32px; font-size: 0.75rem; color: var(--text-muted); }
+  @media print { body { background: white; color: #1a1a1a; } .container { max-width: 100%; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🛡️ SentinelGraph Security Report</h1>
+    <div class="target">https://cyberhackathon.pk/admin/login/</div>
+    <div class="meta">
+      <span>📅 2026-08-12 16:32 UTC</span>
+      <span>⏱ Duration: 2026-08-12T15:47:04.728077Z → 2026-08-12T15:47:12.590741Z</span>
+      <span>📄 26 pages probed</span>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="value" style="color: var(--accent);">12</div>
+      <div class="label">Total Findings</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--critical);">0</div>
+      <div class="label">Critical</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--high);">0</div>
+      <div class="label">High</div>
+    </div>
+    <div class="metric-card">
+      <div class="value" style="color: var(--medium);">4</div>
+      <div class="label">Medium</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Severity Distribution</h2>
+    <div class="severity-bar">
+      
+      <div style="width: 0.0%; background: var(--critical);"></div>
+      
+      <div style="width: 0.0%; background: var(--high);"></div>
+      
+      <div style="width: 33.33333333333333%; background: var(--medium);"></div>
+      
+      <div style="width: 16.666666666666664%; background: var(--low);"></div>
+      
+      <div style="width: 50.0%; background: var(--info);"></div>
+      
+    </div>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--critical);">● Critical: 0</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--high);">● High: 0</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--medium);">● Medium: 4</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--low);">● Low: 2</span>
+    
+    <span style="font-size: 0.8rem; margin-right: 16px; color: var(--info);">● Info: 6</span>
+    
+  </div>
+
+  
+  <div class="section">
+    <h2>Detected Technologies</h2>
+    
+    <span class="tech-tag">Cloudflare</span>
+    
+    <span class="tech-tag">Django</span>
+    
+    <span class="tech-tag">Bootstrap</span>
+    
+  </div>
+  
+
+  
+  <div class="section">
+    <h2>SSL/TLS Certificate</h2>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Issuer</span>
+      <span class="ssl-value" style="color: var(--emerald);">Google Trust Services</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Subject</span>
+      <span class="ssl-value" style="color: var(--emerald);">cyberhackathon.pk</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Valid From</span>
+      <span class="ssl-value" style="color: var(--emerald);">Jun 25 09:08:02 2026 GMT</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Valid To</span>
+      <span class="ssl-value" style="color: var(--emerald);">Sep 23 10:07:46 2026 GMT</span>
+    </div>
+    
+    <div class="ssl-row">
+      <span class="ssl-label">Version</span>
+      <span class="ssl-value" style="color: var(--emerald);">3</span>
+    </div>
+    
+  </div>
+  
+
+  <div class="section">
+    <h2>Security Headers Grade: D</h2>
+    <div style="font-size: 3rem; text-align: center; font-weight: 700; color: var(--high);">
+      D
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Findings (12)</h2>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Missing Security Header: HSTS</span>
+      </div>
+      <div class="finding-desc">The HSTS header is not set. This may weaken security posture.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Missing Security Header: CSP</span>
+      </div>
+      <div class="finding-desc">The CSP header is not set. This may weaken security posture.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Implement a strict Content-Security-Policy header to prevent XSS attacks.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Missing Security Header: X-XSS-Protection</span>
+      </div>
+      <div class="finding-desc">The X-XSS-Protection header is not set. This may weaken security posture.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add header: X-XSS-Protection: 0 (modern browsers use CSP instead).</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">Missing Security Header: Permissions-Policy</span>
+      </div>
+      <div class="finding-desc">The Permissions-Policy header is not set. This may weaken security posture.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add Permissions-Policy header to control browser features.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Missing Security Header: CORP</span>
+      </div>
+      <div class="finding-desc">The CORP header is not set. This may weaken security posture.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add header: Cross-Origin-Resource-Policy: same-origin</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-low">low</span>
+        <span class="finding-title">Server Information Disclosure: server</span>
+      </div>
+      <div class="finding-desc">The 'server' header reveals: cloudflare</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Remove or obfuscate the 'server' header.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Cookie 'csrftoken' Missing Secure Flag</span>
+      </div>
+      <div class="finding-desc">Cookie 'csrftoken' can be sent over unencrypted HTTP.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add 'Secure' flag to cookie 'csrftoken'.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-medium">medium</span>
+        <span class="finding-title">Sensitive Cookie 'csrftoken' Missing HttpOnly</span>
+      </div>
+      <div class="finding-desc">Cookie 'csrftoken' is accessible to JavaScript (XSS risk).</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add 'HttpOnly' flag to cookie 'csrftoken'.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Password Autocomplete Enabled</span>
+      </div>
+      <div class="finding-desc">Password field allows browser autocomplete.</div>
+      <div class="finding-url">https://cyberhackathon.pk/admin/login/</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Add autocomplete="off" to password inputs.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">WordPress Config Exposed - Blocked (/wp-config.php)</span>
+      </div>
+      <div class="finding-desc">Path /wp-config.php exists but returns 403 Forbidden.</div>
+      <div class="finding-url">https://cyberhackathon.pk/wp-config.php</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Verify this path should be accessible.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Robots.txt (/robots.txt)</span>
+      </div>
+      <div class="finding-desc">Accessible at https://cyberhackathon.pk/robots.txt — returned 200 with 1248 bytes.</div>
+      <div class="finding-url">https://cyberhackathon.pk/robots.txt</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Restrict access to /robots.txt or remove from web root.</div>
+      </div>
+      
+    </div>
+    
+    <div class="finding">
+      <div class="finding-header">
+        <span class="badge badge-info">info</span>
+        <span class="finding-title">Apache Status - Blocked (/server-status)</span>
+      </div>
+      <div class="finding-desc">Path /server-status exists but returns 403 Forbidden.</div>
+      <div class="finding-url">https://cyberhackathon.pk/server-status</div>
+      
+      <div class="remediation">
+        <div class="remediation-label">Remediation</div>
+        <div class="remediation-text">Verify this path should be accessible.</div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <div class="footer">
+    <p>Generated by SentinelGraph 0.1.0</p>
+    <p>This report is confidential and intended for authorized personnel only.</p>
+  </div>
+</div>
+</body>
+</html>

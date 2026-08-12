@@ -1,0 +1,61 @@
+# ============================================================
+# SentinelGraph — .gitignore
+# ============================================================
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+.Python
+
+# ── Virtual Environments ────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── Environment ─────────────────────────────────────────────
+.env
+.env.local
+.env.production
+
+# ── IDE ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Node.js ─────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+.cache/
+
+# ── Testing ─────────────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# ── Docker ──────────────────────────────────────────────────
+docker-compose.override.yml
+
+# ── OS ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Evidence & Reports (generated) ──────────────────────────
+evidence/
+reports/
+screenshots/

@@ -1,0 +1,197 @@
+{
+  "target": "https://cyberhackathon.pk/admin/login/",
+  "started_at": "2026-08-12T15:47:04.728077Z",
+  "completed_at": "2026-08-12T15:47:12.590741Z",
+  "status": "complete",
+  "technologies": [
+    "Cloudflare",
+    "Django",
+    "Bootstrap"
+  ],
+  "headers_grade": "D",
+  "ssl_info": {
+    "issuer": "Google Trust Services",
+    "subject": "cyberhackathon.pk",
+    "valid_from": "Jun 25 09:08:02 2026 GMT",
+    "valid_to": "Sep 23 10:07:46 2026 GMT",
+    "version": 3
+  },
+  "pages_crawled": 26,
+  "total_findings": 12,
+  "severity_counts": {
+    "critical": 0,
+    "high": 0,
+    "medium": 4,
+    "low": 2,
+    "info": 6
+  },
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Missing Security Header: HSTS",
+      "description": "The HSTS header is not set. This may weaken security posture.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "evidence": {
+        "header": "strict-transport-security",
+        "status": "missing"
+      },
+      "remediation": "Add header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "medium",
+      "title": "Missing Security Header: CSP",
+      "description": "The CSP header is not set. This may weaken security posture.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "evidence": {
+        "header": "content-security-policy",
+        "status": "missing"
+      },
+      "remediation": "Implement a strict Content-Security-Policy header to prevent XSS attacks.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "Missing Security Header: X-XSS-Protection",
+      "description": "The X-XSS-Protection header is not set. This may weaken security posture.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "evidence": {
+        "header": "x-xss-protection",
+        "status": "missing"
+      },
+      "remediation": "Add header: X-XSS-Protection: 0 (modern browsers use CSP instead).",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "low",
+      "title": "Missing Security Header: Permissions-Policy",
+      "description": "The Permissions-Policy header is not set. This may weaken security posture.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "evidence": {
+        "header": "permissions-policy",
+        "status": "missing"
+      },
+      "remediation": "Add Permissions-Policy header to control browser features.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "Missing Security Header: CORP",
+      "description": "The CORP header is not set. This may weaken security posture.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "security_header",
+      "evidence": {
+        "header": "cross-origin-resource-policy",
+        "status": "missing"
+      },
+      "remediation": "Add header: Cross-Origin-Resource-Policy: same-origin",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "low",
+      "title": "Server Information Disclosure: server",
+      "description": "The 'server' header reveals: cloudflare",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "info_disclosure",
+      "evidence": {
+        "header": "server",
+        "value": "cloudflare"
+      },
+      "remediation": "Remove or obfuscate the 'server' header.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "medium",
+      "title": "Cookie 'csrftoken' Missing Secure Flag",
+      "description": "Cookie 'csrftoken' can be sent over unencrypted HTTP.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "cookie",
+      "evidence": {
+        "cookie": "csrftoken",
+        "flags": [
+          "max-age",
+          "expires",
+          "samesite",
+          "path"
+        ]
+      },
+      "remediation": "Add 'Secure' flag to cookie 'csrftoken'.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "medium",
+      "title": "Sensitive Cookie 'csrftoken' Missing HttpOnly",
+      "description": "Cookie 'csrftoken' is accessible to JavaScript (XSS risk).",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "cookie",
+      "evidence": {
+        "cookie": "csrftoken"
+      },
+      "remediation": "Add 'HttpOnly' flag to cookie 'csrftoken'.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "Password Autocomplete Enabled",
+      "description": "Password field allows browser autocomplete.",
+      "url": "https://cyberhackathon.pk/admin/login/",
+      "category": "best_practice",
+      "evidence": {},
+      "remediation": "Add autocomplete=\"off\" to password inputs.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "WordPress Config Exposed - Blocked (/wp-config.php)",
+      "description": "Path /wp-config.php exists but returns 403 Forbidden.",
+      "url": "https://cyberhackathon.pk/wp-config.php",
+      "category": "sensitive_path",
+      "evidence": {
+        "status": 403
+      },
+      "remediation": "Verify this path should be accessible.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "Robots.txt (/robots.txt)",
+      "description": "Accessible at https://cyberhackathon.pk/robots.txt \u2014 returned 200 with 1248 bytes.",
+      "url": "https://cyberhackathon.pk/robots.txt",
+      "category": "sensitive_path",
+      "evidence": {
+        "status": 200,
+        "size": 1248
+      },
+      "remediation": "Restrict access to /robots.txt or remove from web root.",
+      "cvss_score": null,
+      "confidence": 0.8
+    },
+    {
+      "severity": "info",
+      "title": "Apache Status - Blocked (/server-status)",
+      "description": "Path /server-status exists but returns 403 Forbidden.",
+      "url": "https://cyberhackathon.pk/server-status",
+      "category": "sensitive_path",
+      "evidence": {
+        "status": 403
+      },
+      "remediation": "Verify this path should be accessible.",
+      "cvss_score": null,
+      "confidence": 0.8
+    }
+  ]
+}
